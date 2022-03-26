@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>CheckOut Page</h2>
+    <form action="">
+        <input type="text" id="cardno" placeholder="card no">
+        <input type="text" id="cvv" placeholder="cvv ***">
+        <input type="text" id="name" placeholder="name on card">
+        <input type="submit" id="summ">
+    </form>
+</body>
+</html>
+<script>
+    document.querySelector("form").addEventListener("submit",checkfun);
+   
+function checkfun(){
+     event.preventDefault();
+    var card = document.querySelector("#cardno").value;
+     var cvv = document.querySelector("#cvv").value
+     var name = document.querySelector("#name").value
+      
+     
+     if(card.length>19&&cvv.length>3){
+         alert("invalid input");
+     }
+     else if(card.length==""&&cvv.length==""){
+        alert("please enter the detail")
+     }
+     else{
+       window.location.href = "otp.html";
+     
+     }
+}
+
+</script>

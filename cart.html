@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+       <h2></h2>
+       <input type="text" id="coupon" placeholder="masai30">
+       <button onclick="mycoupon()">apply promo</button>
+       <button><a href="checkout.html" target="blank">Check Out</a></button>
+    </div>
+</body>
+</html>
+
+<script>
+  var data = JSON.parse(localStorage.getItem("cartdetail"));
+console.log(data)
+ var totalP =  data.reduce(function(sum,el,index,arr){
+         sum += el.price;
+         return sum;
+  },0)
+  
+  var length = data.length;
+  document.querySelector("h2").innerText = ` You have ${length} items in cart and  total is Rs ${totalP}`;
+  
+  function mycoupon(){
+      var coupon = document.querySelector("#coupon").value;
+      if(coupon == "masai30"){
+          totalP = totalP-Math.floor( ((totalP*30)/100))
+          alert("hurray!! you get 30% discount ")
+        //   console.log(totalP)
+        document.querySelector("h2").innerText = ` You have ${length} items in cart and  total is Rs ${totalP}`;
+        }else{
+            alert("this promo code is not applicable");
+        }
+    }
+    
+ 
+  data.map(function (el,index) {
+        var box = document.createElement("div");
+        var image = document.createElement("img");
+        image.src = el.image_url;
+        var name = document.createElement("p");
+        name.textContent = el.name
+        var price = document.createElement("h3");
+        price.textContent = el.price
+
+        
+        
+        var btn = document.createElement("button");
+        btn.innerText = 'remove';
+        btn.addEventListener("click",function(){
+            removeItem(el,index);
+        })
+        box.append(image, name,price,  btn);
+      
+        document.querySelector("#container").append(box)
+    })
+
+    function removeItem(el,i){
+        console.log(el,i);
+        data.splice(i,1);
+       localStorage.setItem("cartdetail",JSON.stringify(data))
+       window.location.reload();
+    }
+</script>

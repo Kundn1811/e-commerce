@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <style>
+        #container {
+            /* border: 1px solid red; */
+            background-color: teal;
+            width: 95%;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        a {
+            font-size: 20px;
+            padding: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: antiquewhite;
+        }
+
+        a:hover {
+            color: rgb(209, 230, 248);
+        }
+
+        form {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            padding: 10px;
+
+        }
+
+        form>input {
+            margin: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <a target="blank" href="women.html">Womens</a>
+        <a href="mens.html">Mens</a>
+        <a href="signup.html">Signup</a>
+        <a href="login.html">Login</a>
+    </div>
+    <div id="log">
+        <form>
+            <input id="email" type="email" placeholder="Enter email" />
+            <input id="pass" type="password" placeholder="Enter password" />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+
+</html>
+<script>
+    var data = JSON.parse(localStorage.getItem("signupData"));
+    document.querySelector("form").addEventListener("submit", logfun);
+  //  console.log(data)
+    function logfun() {
+        event.preventDefault();
+        var usermail = document.querySelector("#email").value;
+        var userpswd = document.querySelector("#pass").value;
+        //console.log(usermail, userpswd)
+        var check = false;
+        for (var i = 0; i < data.length; i++) {
+           // console.log(data[i])
+            if (data[i].Email == usermail && data[i].Pswd == userpswd) {
+                check = true;
+            }
+        }
+        if (check) {
+            alert("Login successfull")
+
+            window.location.href = "women.html";
+        }else{
+            alert("login failed  ")
+        }
+
+    }
+
+
+</script>
